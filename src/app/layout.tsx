@@ -25,14 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <QueryClientProvider client={queryClientConfig}>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-        </body>
-      </html>
-    </QueryClientProvider>
+    <html lang="en" translate="no">
+      <body suppressHydrationWarning>{children}</body>
+    </html>
   );
 }
