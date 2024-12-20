@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint src",
     "format": "prettier --write .",
     "start:dev": "env-cmd -f .env.development next start",
     "start:staging": "env-cmd -f .env.staging next start",

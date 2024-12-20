@@ -1,4 +1,4 @@
-import typescriptParser from "@typescript-eslint/parser";
+import typescriptParser from '@typescript-eslint/parser';
 export default [
   {
     files: ['**/*.{ts,tsx}'],
@@ -6,13 +6,13 @@ export default [
       parser: typescriptParser,
       parserOptions: {
         ecmaVersion: 2021,
-        sourceType: "module",
+        sourceType: 'module',
         ecmaFeatures: {
           jsx: true,
         },
       },
     },
-    ignores: ['.next', 'node_modules'],
+    ignores: ['.next/', 'node_modules'],
     rules: {
       'no-unused-vars': 'warn',
     },

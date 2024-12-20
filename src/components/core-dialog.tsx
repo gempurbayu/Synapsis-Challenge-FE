@@ -7,13 +7,24 @@ export interface CoreDialogProps {
   children: ReactNode;
   onSubmit?: () => void;
   title: string;
+  submitTextBtn?: string;
+  cancelTextBtn?: string;
   loading?: boolean;
   open: boolean;
   onClose: () => void;
 }
 
 const CoreDialog = (props: CoreDialogProps) => {
-  const { children, title, loading, open, onClose, onSubmit } = props;
+  const {
+    children,
+    title,
+    loading,
+    open,
+    onClose,
+    onSubmit,
+    submitTextBtn,
+    cancelTextBtn,
+  } = props;
 
   const handleCancel = () => {
     onClose();
@@ -27,7 +38,7 @@ const CoreDialog = (props: CoreDialogProps) => {
         onCancel={handleCancel}
         footer={[
           <Button key="back" onClick={handleCancel}>
-            Return
+            {cancelTextBtn ? cancelTextBtn : 'Back'}
           </Button>,
           <Button
             key="submit"
@@ -35,10 +46,12 @@ const CoreDialog = (props: CoreDialogProps) => {
             loading={loading}
             onClick={onSubmit}
           >
-            Submit
+            {submitTextBtn ? submitTextBtn : 'Submit'}
           </Button>,
         ]}
-      >{children}</Modal>
+      >
+        {children}
+      </Modal>
     </>
   );
 };
