@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
 import { StyleProvider, createCache, extractStyle } from '@ant-design/cssinjs';
 import type Entity from '@ant-design/cssinjs/es/Cache';

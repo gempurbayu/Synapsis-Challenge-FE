@@ -1,6 +1,7 @@
 'use client';
 
 import queryClientConfig from '@/config/query-client.config';
+import { SessionProvider } from '@/context/session-provider.context';
 import RootStyleRegistry from '@/utils/root-style-registry.utils';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
@@ -11,7 +12,7 @@ export default function Provider({ children }: ProviderProps) {
   return (
     <QueryClientProvider client={queryClientConfig}>
       <RootStyleRegistry>
- {children}
+        <SessionProvider>{children}</SessionProvider>
       </RootStyleRegistry>
     </QueryClientProvider>
   );

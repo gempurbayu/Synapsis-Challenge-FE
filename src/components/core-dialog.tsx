@@ -38,7 +38,7 @@ const CoreDialog = (props: CoreDialogProps) => {
             Submit
           </Button>,
         ]}
-      ></Modal>
+      >{children}</Modal>
     </>
   );
 };
