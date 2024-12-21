@@ -6,6 +6,7 @@ import {
   PaginationProps,
   Row,
   Spin,
+  theme,
   Typography,
 } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -22,6 +23,8 @@ function GridPost() {
   const router = useRouter();
 
   const session = useSession();
+
+  const token = theme.useToken();
 
   const { data, refetch, isLoading, error } = useGetPosts(page, postPerPage);
 
@@ -55,7 +58,10 @@ function GridPost() {
 
   return (
     <>
-      <div className="bg-white p-6 mt-5 rounded-xl mb-5">
+      <div
+        className="p-6 mt-5 rounded-xl mb-5"
+        style={{ backgroundColor: token.token.colorBgContainer }}
+      >
         <Title level={3} style={{ margin: 'auto', padding: 'auto' }}>
           Welcome to Blog <b className="text-blue-400">Synapsis</b>,{' '}
           <b>{session.name}!</b>
@@ -71,7 +77,7 @@ function GridPost() {
               onClick={() => {
                 router.push(`/post/${item.id}`);
               }}
-              className="transition-transform ease-in transform hover:scale-105 hover:z-50 cursor-pointer"
+              className="z-0 transition-transform ease-in transform hover:scale-105 hover:z-20 cursor-pointer h-full"
               title={
                 <div className="whitespace-normal break-words hover:text-blue-500">
                   <div className="font-bold">{item.title}</div>
