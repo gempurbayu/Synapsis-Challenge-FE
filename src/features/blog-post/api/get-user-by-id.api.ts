@@ -1,7 +1,7 @@
 import httpClient from '@/services/http-client';
-import { GetUserSchema } from '../schema/get-user.schema';
+import { IUser } from '../types/user.type';
 
 const getUserByIdApi = (id: number) =>
-  httpClient.get<GetUserSchema>(`/public/v2/users/${id}`);
+  httpClient.get<IUser>(`/public/v2/users/${id}`);
 
 export default getUserByIdApi;

@@ -6,14 +6,20 @@ import {
   PaginationProps,
   Row,
   Spin,
+  Typography,
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import useGetPosts from '../hooks/get-post.hook';
-import { GetPostSchema } from '../schema/get-post.schema';
+import { useSession } from '@/context/session-provider.context';
+import { IPost } from '../types/post.type';
+
+const { Title } = Typography;
 
 function GridPost() {
   const [postPerPage, setPostPerPage] = useState(20);
   const [page, setPage] = useState(1);
+
+  const session = useSession();
 
   const { data, refetch, isLoading, error } = useGetPosts(page, postPerPage);
 
@@ -47,8 +53,17 @@ function GridPost() {
 
   return (
     <>
+      <div className="bg-white h-full p-6 mt-5 rounded-xl mb-5">
+        <Title level={3} style={{ margin: 'auto', padding: 'auto' }}>
+          Welcome to Blog <b className="text-blue-400">Synapsis</b>,{' '}
+          <b>{session.name}!</b>
+        </Title>
+      </div>
+      <Title level={3} style={{ fontWeight: 'bold', marginBottom: 20 }}>
+        Find Articles
+      </Title>
       <Row gutter={[16, 16]}>
-        {data?.data.map((item: GetPostSchema) => (
+        {data?.data.map((item: IPost) => (
           <Col xs={24} sm={12} key={item.id}>
             <Card
               className="transition-transform ease-in transform hover:scale-105 hover:z-50 cursor-pointer"

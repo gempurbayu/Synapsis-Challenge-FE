@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface SessionContextType {
   name: string;
@@ -17,14 +17,30 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({
   const [name, setName] = useState('');
   const [accessToken, setAccessToken] = useState('');
 
+  useEffect(() => {
+    // Load session data from localStorage on initial render
+    const savedName = localStorage.getItem('name') || '';
+    const savedAccessToken = localStorage.getItem('accessToken') || '';
+    setName(savedName);
+    setAccessToken(savedAccessToken);
+  }, []);
+
   const setSession = (name: string, accessToken: string) => {
     setName(name);
     setAccessToken(accessToken);
+
+    // Save session data to localStorage
+    localStorage.setItem('name', name);
+    localStorage.setItem('accessToken', accessToken);
   };
 
   const clearSession = () => {
     setName('');
     setAccessToken('');
+
+    // Remove session data from localStorage
+    localStorage.removeItem('name');
+    localStorage.removeItem('accessToken');
   };
 
   return (

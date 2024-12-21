@@ -23,10 +23,47 @@ httpClient.interceptors.request.use(
 httpClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    notification.error({
-      message: 'Authentication Required',
-      description: 'You must log in to continue.',
-    });
+    const { response } = error;
+
+    if (response) {
+      const { status } = response;
+
+      // Check for specific error codes
+      if (status === 401) {
+        // Handle unauthorized access
+        notification.error({
+          message: 'Authentication Required',
+          description: 'You must log in to continue.',
+        });
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('name');
+
+        window.location.replace('/');
+      } else if (status === 403) {
+        // Handle forbidden access
+        notification.error({
+          message: 'Forbidden',
+          description: 'You do not have permission to access this resource.',
+          showProgress: true,
+        });
+      } else {
+        // Handle other errors
+        notification.error({
+          message: `Error ${status}`,
+          description:
+            response?.data?.message || 'An unexpected error occurred.',
+          showProgress: true,
+        });
+      }
+    } else {
+      // Handle network or other errors (e.g., no response object)
+      notification.error({
+        message: 'Network Error',
+        description:
+          'An error occurred while trying to connect. Please try again later.',
+        showProgress: true,
+      });
+    }
 
     console.error('HTTP Error:', error);
     return Promise.reject(error);
