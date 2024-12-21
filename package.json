@@ -3,20 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "copy .env.development .env.local && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write ."
+    "lint": "eslint src",
+    "format": "prettier --write .",
+    "start:dev": "env-cmd -f .env.development next start",
+    "start:staging": "env-cmd -f .env.staging next start",
+    "start:production": "env-cmd -f .env.production next start"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.22.1",
+    "@ant-design/icons": "^5.5.2",
     "@tanstack/react-query": "^5.62.8",
     "antd": "^5.22.5",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
-    "next": "15.1.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "^13.5.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "yup": "^1.6.1"
   },
   "devDependencies": {
@@ -26,6 +31,7 @@
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^8.18.1",
     "@typescript-eslint/parser": "^8.18.1",
+    "env-cmd": "^10.1.0",
     "eslint": "^9.17.0",
     "eslint-config-next": "15.1.1",
     "eslint-config-prettier": "^9.1.0",

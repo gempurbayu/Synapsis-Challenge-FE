@@ -1,3 +1,4 @@
+import { notification } from 'antd';
 import axios from 'axios';
 
 const httpClient = axios.create({
@@ -20,9 +21,84 @@ httpClient.interceptors.request.use(
 );
 
 httpClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    const { status } = response;
+
+    if (status === 201) {
+      notification.success({
+        message: 'Create Data Success!',
+        showProgress: true,
+      });
+    }
+
+    if (status === 204) {
+      notification.success({
+        message: 'Delete Data Success!',
+        showProgress: true,
+      });
+    }
+
+    return response;
+  },
   (error) => {
-    // Penanganan error global
+    const { response } = error;
+
+    if (response) {
+      const { status } = response;
+
+      console.log(status);
+
+      if (status === 201) {
+        notification.success({
+          message: 'Create Data Success!',
+          showProgress: true,
+        });
+      }
+
+      if (status === 204) {
+        notification.success({
+          message: 'Delete Data Success!',
+          showProgress: true,
+        });
+      }
+
+      // Check for specific error codes
+      if (status === 401) {
+        // Handle unauthorized access
+        notification.error({
+          message: 'Authentication Required',
+          description: 'You must log in to continue.',
+        });
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('name');
+
+        window.location.replace('/');
+      } else if (status === 403) {
+        // Handle forbidden access
+        notification.error({
+          message: 'Forbidden',
+          description: 'You do not have permission to access this resource.',
+          showProgress: true,
+        });
+      } else {
+        // Handle other errors
+        notification.error({
+          message: `Error ${status}`,
+          description:
+            response?.data?.message || 'An unexpected error occurred.',
+          showProgress: true,
+        });
+      }
+    } else {
+      // Handle network or other errors (e.g., no response object)
+      notification.error({
+        message: 'Network Error',
+        description:
+          'An error occurred while trying to connect. Please try again later.',
+        showProgress: true,
+      });
+    }
+
     console.error('HTTP Error:', error);
     return Promise.reject(error);
   }
