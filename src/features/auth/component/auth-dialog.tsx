@@ -29,6 +29,7 @@ const AuthDialog = ({ open, setCloseDialog }: AuthDialogProps) => {
       disableBtn
     >
       <Form
+        role="dialog-login"
         className="mt-4"
         name="basic"
         wrapperCol={{ span: 24 }}
@@ -41,7 +42,7 @@ const AuthDialog = ({ open, setCloseDialog }: AuthDialogProps) => {
           name="name"
           rules={[{ required: true, message: 'Please input your Name!' }]}
         >
-          <Input />
+          <Input id="name" />
         </Form.Item>
 
         <Form.Item<FieldType>
@@ -51,11 +52,11 @@ const AuthDialog = ({ open, setCloseDialog }: AuthDialogProps) => {
             { required: true, message: 'Please input your Access Token!' },
           ]}
         >
-          <Input.Password />
+          <Input.Password id="accessToken" />
         </Form.Item>
 
         <Form.Item label={null}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" id="submit">
             Submit
           </Button>
         </Form.Item>

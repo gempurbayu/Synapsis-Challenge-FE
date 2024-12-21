@@ -97,7 +97,7 @@ const FormPost = () => {
             name="title"
             rules={[{ required: true, message: 'Please input title!' }]}
           >
-            <Input />
+            <Input id="title" />
           </Form.Item>
           {/* <Form.Item<TPostPayload>
             label="User"
@@ -115,7 +115,7 @@ const FormPost = () => {
               { required: true, message: 'Please input available user_id!' },
             ]}
           >
-            <Input type="number" />
+            <Input type="number" id="user_id" />
           </Form.Item>
 
           <Form.Item<TPostPayload>
@@ -123,13 +123,14 @@ const FormPost = () => {
             name="body"
             rules={[{ required: true, message: 'Please input body!' }]}
           >
-            <Input.TextArea rows={8} />
+            <Input.TextArea rows={8} id="body" />
           </Form.Item>
 
           <Form.Item label={null}>
             <Button
               type="primary"
               htmlType="submit"
+              id="submit"
               style={{ width: 150, margin: 0, padding: 0 }}
             >
               Submit

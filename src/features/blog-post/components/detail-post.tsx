@@ -86,6 +86,7 @@ function DetailPost() {
             {session.accessToken && (
               <div className="lg:w-[15%] mt-2 lg:mt-0 flex justify-end">
                 <Button
+                  id="btn-edit"
                   variant="solid"
                   color="primary"
                   icon={<EditOutlined />}
@@ -96,6 +97,7 @@ function DetailPost() {
                   }
                 />
                 <Button
+                  id="btn-delete"
                   variant="solid"
                   color="danger"
                   icon={<DeleteOutlined />}

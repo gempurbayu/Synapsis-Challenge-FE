@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   Col,
   Flex,
@@ -108,16 +109,26 @@ function GridPost() {
           </Title>
         </Flex>
       </div>
-      <div className="w-[100vw] md:w-6/12">
+      <div className="w-[100vw] md:w-6/12 flex flex-col md:flex-row mb-2">
         <Input
+          id="search"
           placeholder="Search Post"
           prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-          style={{ marginBottom: 15, width: '50%' }}
+          style={{ marginBottom: 15, width: 200 }}
           size="large"
           onChange={debounce((e: string) => {
             handleSearch(e);
           })}
         />
+        <Button
+          type="primary"
+          block
+          size="large"
+          style={{ backgroundColor: 'green', width: 150 }}
+          onClick={() => router.push('/post/create')}
+        >
+          Create New Post
+        </Button>
       </div>
       <Row gutter={[16, 16]}>
         {data?.data.map((item: IPost) => (

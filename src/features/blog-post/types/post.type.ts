@@ -10,4 +10,5 @@ export type TPostPayload = {
   title: string;
   body: string;
   user_id: number;
+  user?: string;
 };
