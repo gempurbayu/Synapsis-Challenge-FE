@@ -33,7 +33,7 @@ jobs:
         run: npm run format 
 
       - name: Build Next.js
-        run: npm build:dev 
+        run: npm run build:dev 
 
   deploy:
     name: Deploy to Vercel
