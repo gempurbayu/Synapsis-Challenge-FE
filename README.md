@@ -2,6 +2,8 @@
 
 The goal of this challenge is to create a Blog Post App using modern web development tools and practices. This app will allow users to interact with public blog data through a user-friendly interface while demonstrating proficiency in building robust and efficient applications.
 
+See On Vercel : [Click Here](https://react.dev/learn/reusing-logic-with-custom-hooks).
+
 ## Tech Stack
 
 **Client:** NextJS, Cypress, TailwindCSS, Ant Design, Typescript
