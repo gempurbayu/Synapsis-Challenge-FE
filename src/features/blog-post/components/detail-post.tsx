@@ -1,4 +1,4 @@
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import useGetPostById from '../hooks/get-post-by-id.hook';
 import {
@@ -21,6 +21,7 @@ const { Title } = Typography;
 function DetailPost() {
   const params = useParams();
   const session = useSession();
+  const router = useRouter();
   const { token } = theme.useToken();
 
   const [userId, setUserId] = useState<number | null>(null);
@@ -59,7 +60,7 @@ function DetailPost() {
         ]}
       />
       <Row gutter={16}>
-        <Col xs={24} lg={17}>
+        <Col xs={24} lg={15}>
           <div
             className="w-full bg-white px-6 py-2 mt-5 rounded-xl mb-5 md:flex justify-between items-center"
             style={{
@@ -90,6 +91,9 @@ function DetailPost() {
                   icon={<EditOutlined />}
                   size={'large'}
                   style={{ marginRight: 10 }}
+                  onClick={() =>
+                    router.push(`/post/edit/${data?.data.id as number}`)
+                  }
                 />
                 <Button
                   variant="solid"
@@ -109,54 +113,57 @@ function DetailPost() {
             <span className="text-lg">{data?.data.body}</span>
           </div>
         </Col>
-        <Col xs={24} lg={7}>
+        <Col xs={24} lg={9}>
           <div className="flex-row items-center justify-center w-full px-6 py-2 mt-3">
             <Button
               type="primary"
               block
               size="large"
               style={{ backgroundColor: 'green' }}
+              onClick={() => router.push('/post/create')}
             >
               Create New Post
             </Button>
           </div>
           <div className="w-full px-6 py-2 mb-5">
             <Card title="Author Information" bordered={false}>
-              <table className="text-sm">
-                <tr>
-                  <td>Name</td>
-                  <td>:</td>
-                  <td>
-                    <b>{userData?.data.name}</b>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Email</td>
-                  <td>:</td>
-                  <td>
-                    <b>{userData?.data.email}</b>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Gender</td>
-                  <td>:</td>
-                  <td>
-                    <b>{userData?.data.gender}</b>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Status</td>
-                  <td>:</td>
-                  <td>
-                    <Tag
-                      color={
-                        userData?.data.status === 'active' ? 'green' : 'red'
-                      }
-                    >
-                      {userData?.data.status}
-                    </Tag>
-                  </td>
-                </tr>
+              <table className="text-sm w-full table-auto">
+                <tbody>
+                  <tr>
+                    <td>Name</td>
+                    <td>:</td>
+                    <td>
+                      <b>{userData?.data.name}</b>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td>:</td>
+                    <td>
+                      <b>{userData?.data.email}</b>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Gender</td>
+                    <td>:</td>
+                    <td>
+                      <b>{userData?.data.gender}</b>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Status</td>
+                    <td>:</td>
+                    <td>
+                      <Tag
+                        color={
+                          userData?.data.status === 'active' ? 'green' : 'red'
+                        }
+                      >
+                        {userData?.data.status}
+                      </Tag>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </Card>
           </div>

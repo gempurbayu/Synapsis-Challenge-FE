@@ -1,6 +1,7 @@
 import {
   Card,
   Col,
+  Flex,
   notification,
   Pagination,
   PaginationProps,
@@ -50,9 +51,9 @@ function GridPost() {
 
   if (isLoading) {
     return (
-      <div className="w-[100%] flex-row justify-center items-center m-auto p-auto">
-        <Spin size="large" />
-      </div>
+      <Flex align="center" gap="middle">
+        <Spin size="large" style={{ padding: 'auto', margin: 'auto' }} />
+      </Flex>
     );
   }
 
