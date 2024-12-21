@@ -101,22 +101,24 @@ function GridPost() {
         >
           <Title
             level={3}
-            style={{ margin: 'auto', padding: 'auto', textAlign: 'left' }}
+            style={{ margin: 'auto', padding: '2', textAlign: 'center' }}
           >
             Welcome to Blog <b className="text-blue-400">Synapsis</b>,{' '}
             <b>{session.name}!</b>
           </Title>
         </Flex>
       </div>
-      <Input
-        placeholder="Search Post"
-        prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-        style={{ marginBottom: 15, width: 400 }}
-        size="large"
-        onChange={debounce((e: string) => {
-          handleSearch(e);
-        })}
-      />
+      <div className="w-[100vw] md:w-6/12">
+        <Input
+          placeholder="Search Post"
+          prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+          style={{ marginBottom: 15, width: '50%' }}
+          size="large"
+          onChange={debounce((e: string) => {
+            handleSearch(e);
+          })}
+        />
+      </div>
       <Row gutter={[16, 16]}>
         {data?.data.map((item: IPost) => (
           <Col xs={24} sm={12} key={item.id}>

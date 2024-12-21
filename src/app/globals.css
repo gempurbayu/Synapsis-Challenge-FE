@@ -18,4 +18,20 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tambahkan overflow-x untuk body */
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Sesuaikan untuk elemen utama */
+#__next {
+  width: 100%;
+  height: 100%;
 }

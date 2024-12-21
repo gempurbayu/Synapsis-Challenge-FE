@@ -38,7 +38,7 @@ const CoreMainLayout = (props: MainLayoutProps) => {
 
   return (
     <Layout className="m-0 p-0" style={{ minHeight: 800 }}>
-      <div className="fixed bottom-6 right-6 z-40">
+      <div className="fixed right-4 bottom-6 md:right-6 z-40">
         <button
           onClick={toggleTheme}
           className={` text-white p-2 rounded-full transition transform z-auto ${
