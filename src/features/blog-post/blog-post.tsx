@@ -6,6 +6,7 @@ import { Breadcrumb } from 'antd';
 
 const BlogPost = () => {
   const session = useSession();
+
   const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {

@@ -1,7 +1,16 @@
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import useGetPostById from '../hooks/get-post-by-id.hook';
-import { Breadcrumb, Button, Card, Col, Row, Tag, Typography } from 'antd';
+import {
+  Breadcrumb,
+  Button,
+  Card,
+  Col,
+  Row,
+  Tag,
+  theme,
+  Typography,
+} from 'antd';
 import useGetUserById from '../hooks/get-user-by-id.hook';
 import { useDeletePost } from '../hooks/delete-post-by-id.hook';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
@@ -12,6 +21,7 @@ const { Title } = Typography;
 function DetailPost() {
   const params = useParams();
   const session = useSession();
+  const { token } = theme.useToken();
 
   const [userId, setUserId] = useState<number | null>(null);
   const { data } = useGetPostById(Number(params?.id));
@@ -50,8 +60,14 @@ function DetailPost() {
       />
       <Row gutter={16}>
         <Col xs={24} lg={17}>
-          <div className="w-full bg-white px-6 py-2 mt-5 rounded-xl mb-5 flex justify-between items-center">
-            <div className="w-[85%]">
+          <div
+            className="w-full bg-white px-6 py-2 mt-5 rounded-xl mb-5 md:flex justify-between items-center"
+            style={{
+              color: token.colorTextBase,
+              backgroundColor: token.colorBgContainer,
+            }}
+          >
+            <div className="lg:w-[85%]">
               <Title level={3} style={{ fontWeight: 'bold', marginBottom: 8 }}>
                 {data?.data.title}
               </Title>
@@ -67,7 +83,7 @@ function DetailPost() {
               </span>
             </div>
             {session.accessToken && (
-              <div className="w-[15%] flex justify-end">
+              <div className="lg:w-[15%] mt-2 lg:mt-0 flex justify-end">
                 <Button
                   variant="solid"
                   color="primary"
@@ -81,11 +97,15 @@ function DetailPost() {
                   icon={<DeleteOutlined />}
                   size={'large'}
                   onClick={() => mutateAsync(data?.data.id as number)}
+                  style={{ boxShadow: 'none' }}
                 />
               </div>
             )}
           </div>
-          <div className="bg-white p-6 mt-5 rounded-xl mb-5">
+          <div
+            className=" p-6 mt-5 rounded-xl mb-5"
+            style={{ backgroundColor: token.colorBgContainer }}
+          >
             <span className="text-lg">{data?.data.body}</span>
           </div>
         </Col>

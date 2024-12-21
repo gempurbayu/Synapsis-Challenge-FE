@@ -3,6 +3,8 @@ import { Layout, Menu, MenuProps, Typography } from 'antd';
 import { useSession } from '@/context/session-provider.context';
 import AuthDialog from '@/features/auth/component/auth-dialog';
 import { useRouter } from 'next/navigation';
+import { useTheme } from '@/context/theme-provider.context';
+import { MoonOutlined, SunOutlined } from '@ant-design/icons';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -13,6 +15,7 @@ const { Title } = Typography;
 
 const CoreMainLayout = (props: MainLayoutProps) => {
   const { children } = props;
+  const { isDarkMode, toggleTheme } = useTheme();
 
   const { clearSession, accessToken } = useSession();
   const router = useRouter();
@@ -35,6 +38,16 @@ const CoreMainLayout = (props: MainLayoutProps) => {
 
   return (
     <Layout className="m-0 p-0" style={{ minHeight: 800 }}>
+      <div className="fixed bottom-6 right-6 z-40">
+        <button
+          onClick={toggleTheme}
+          className={` text-white p-2 rounded-full transition transform z-auto ${
+            isDarkMode ? 'bg-white text-black' : 'bg-black text-white'
+          }`}
+        >
+          {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
+        </button>
+      </div>
       <Header className="flex items-center justify-between ">
         <Title
           level={4}
