@@ -8,34 +8,33 @@ import {
   Typography,
 } from 'antd';
 import { useParams } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TPostPayload } from '../types/post.type';
 import { useCreatePost } from '../hooks/create-post.hook';
 import useGetPostById from '../hooks/get-post-by-id.hook';
+import { useEditPost } from '../hooks/edit-post.hook';
 
 const { Title } = Typography;
 
 const FormPost = () => {
   const { token } = theme.useToken();
   const params = useParams();
-  const [form] = Form.useForm();
-  const { mutateAsync } = useCreatePost();
+  const { mutateAsync: createPostMutate } = useCreatePost();
+  const { mutateAsync: editPostMutate } = useEditPost();
 
   const { data } = useGetPostById(Number(params?.id) as number);
 
   const onFinish: FormProps<TPostPayload>['onFinish'] = async (values) => {
     try {
-      await mutateAsync(values);
+      if (params?.id) {
+        await editPostMutate({ ...values, id: Number(params?.id) });
+      } else {
+        await createPostMutate(values);
+      }
     } catch (err) {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    if (data) {
-      form.setFieldValue('title', data.data.title);
-    }
-  }, [data]);
 
   return (
     <>
@@ -82,7 +81,7 @@ const FormPost = () => {
             focus: true,
           }}
           initialValues={{
-            id: data?.data.id,
+            id: Number(data?.data.id),
             title: data?.data.title,
             body: data?.data.body,
             user_id: data?.data.user_id,
