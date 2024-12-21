@@ -16,7 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" translate="no">
-      <body suppressHydrationWarning style={{ padding: 0, margin: 0 }}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body suppressHydrationWarning>
         <Provider>{children}</Provider>
       </body>
     </html>

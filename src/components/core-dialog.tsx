@@ -38,6 +38,7 @@ const CoreDialog = (props: CoreDialogProps) => {
         open={open}
         title={title}
         onCancel={handleCancel}
+        style={{ margin: 'auto', padding: 'auto' }}
         footer={
           !disableBtn && [
             <Button key="back" onClick={handleCancel}>

@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **Synapsis Challenge Frontend**
 
-## Getting Started
+The goal of this challenge is to create a Blog Post App using modern web development tools and practices. This app will allow users to interact with public blog data through a user-friendly interface while demonstrating proficiency in building robust and efficient applications.
 
-First, run the development server:
+## Tech Stack
+
+**Client:** NextJS, Cypress, TailwindCSS, Ant Design, Typescript
+
+**Server:** Node
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/gempurbayu/Synapsis-Challenge-FE.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd Synapsis-Challenge_FE
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment Variables
 
-## Deploy on Vercel
+To run this project, you will need to add the following environment variables to your .env file
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`NEXT_PUBLIC_API_UR`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`NEXT_PUBLIC_APP_NAME`
+
+## Next.js Application Structure
+
+### 1. `components`
+
+- **Description**: Global reusable components that can be used throughout the application.
+
+### 4. `config`
+
+- **Description**: Configuration files for the application, including settings for APIs, environment, etc.
+
+### 5. `features`
+
+- **Description**: Stores all application logic, organized by feature or domain.
+
+- **Subfolders for each feature**:
+  - `components`: Components related to the specific feature.
+  - `hooks`: Reusable custom hooks, as described in [React Reusing Logic with Custom Hooks](https://react.dev/learn/reusing-logic-with-custom-hooks).
+
+### 6. `context`
+
+- **Description**: Store and manage data or states that need to be accessible across multiple components, without passing props manually at each level.
+
+## Features
+
+- Light/dark mode toggle
+- Responsive Layout
+- Post Crud
+- Login Popup
+
+## Rest API
+
+GoRest provides an API that supports **CRUD** operations (Create, Read, Update, and Delete) on resources like users, posts, and comments. Below is an explanation of how to interact with **Post** resources using GoRest API.
+
+[GoRest API Documentation](https://gorest.co.in/).
