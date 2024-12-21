@@ -1,5 +1,7 @@
+import GridPost from './components/grid-post';
+
 const BlogPost = () => {
-  return 'Blog Post';
+  return <GridPost />;
 };
 
 export default BlogPost;

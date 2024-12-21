@@ -1,3 +1,4 @@
+import { notification } from 'antd';
 import axios from 'axios';
 
 const httpClient = axios.create({
@@ -22,7 +23,11 @@ httpClient.interceptors.request.use(
 httpClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Penanganan error global
+    notification.error({
+      message: 'Authentication Required',
+      description: 'You must log in to continue.',
+    });
+
     console.error('HTTP Error:', error);
     return Promise.reject(error);
   }

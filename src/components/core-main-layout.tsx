@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, MenuProps, theme, Typography } from 'antd';
+import { Layout, Menu, MenuProps, Typography } from 'antd';
 import { useSession } from '@/context/session-provider.context';
 
 interface MainLayoutProps {
@@ -12,9 +12,7 @@ const { Title } = Typography;
 
 const CoreMainLayout = (props: MainLayoutProps) => {
   const { children } = props;
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+
   const { clearSession, name, accessToken } = useSession();
 
   const menuItems: MenuProps['items'] = [
@@ -33,7 +31,7 @@ const CoreMainLayout = (props: MainLayoutProps) => {
   ];
 
   return (
-    <Layout style={{ margin: 0, padding: 0 }}>
+    <Layout style={{ margin: 0, padding: 0, minHeight: '100vh' }}>
       <Header
         style={{
           display: 'flex',
@@ -43,39 +41,41 @@ const CoreMainLayout = (props: MainLayoutProps) => {
         }}
       >
         <Title
-          level={3}
+          level={4}
           style={{ color: 'white', marginTop: 'auto', marginBottom: 'auto' }}
         >
-          Blog Post <b>Synapsis</b>
+          Blog <b className="text-blue-400">Synapsis</b>
         </Title>
         <Menu
           theme="dark"
           mode="horizontal"
           items={menuItems}
           style={{
-            width: '50%',
+            width: '30%',
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'end',
           }}
         ></Menu>
       </Header>
-      <Content style={{ padding: '0 48px' }}>
+      <Content style={{ padding: '20px 48px' }}>
         {/* <Breadcrumb style={{ margin: '16px 0' }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb> */}
-        <div
+        {/* <div
           style={{
             background: colorBgContainer,
             minHeight: 280,
             padding: 24,
+            marginTop: 20,
+            height: '100%',
             borderRadius: borderRadiusLG,
           }}
-        >
-          {children}
-        </div>
+        > */}
+        {children}
+        {/* </div> */}
       </Content>
       <Footer style={{ textAlign: 'center' }}>
         Ant Design ©{new Date().getFullYear()} Created by Ant UED
