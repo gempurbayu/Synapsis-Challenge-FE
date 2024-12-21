@@ -12,12 +12,14 @@ import React, { useEffect, useState } from 'react';
 import useGetPosts from '../hooks/get-post.hook';
 import { useSession } from '@/context/session-provider.context';
 import { IPost } from '../types/post.type';
+import { useRouter } from 'next/navigation';
 
 const { Title } = Typography;
 
 function GridPost() {
   const [postPerPage, setPostPerPage] = useState(20);
   const [page, setPage] = useState(1);
+  const router = useRouter();
 
   const session = useSession();
 
@@ -53,7 +55,7 @@ function GridPost() {
 
   return (
     <>
-      <div className="bg-white h-full p-6 mt-5 rounded-xl mb-5">
+      <div className="bg-white p-6 mt-5 rounded-xl mb-5">
         <Title level={3} style={{ margin: 'auto', padding: 'auto' }}>
           Welcome to Blog <b className="text-blue-400">Synapsis</b>,{' '}
           <b>{session.name}!</b>
@@ -66,6 +68,9 @@ function GridPost() {
         {data?.data.map((item: IPost) => (
           <Col xs={24} sm={12} key={item.id}>
             <Card
+              onClick={() => {
+                router.push(`/post/${item.id}`);
+              }}
               className="transition-transform ease-in transform hover:scale-105 hover:z-50 cursor-pointer"
               title={
                 <div className="whitespace-normal break-words hover:text-blue-500">

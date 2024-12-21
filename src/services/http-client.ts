@@ -21,12 +21,46 @@ httpClient.interceptors.request.use(
 );
 
 httpClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    const { status } = response;
+
+    if (status === 201) {
+      notification.success({
+        message: 'Create Data Success!',
+        showProgress: true,
+      });
+    }
+
+    if (status === 204) {
+      notification.success({
+        message: 'Delete Data Success!',
+        showProgress: true,
+      });
+    }
+
+    return response;
+  },
   (error) => {
     const { response } = error;
 
     if (response) {
       const { status } = response;
+
+      console.log(status);
+
+      if (status === 201) {
+        notification.success({
+          message: 'Create Data Success!',
+          showProgress: true,
+        });
+      }
+
+      if (status === 204) {
+        notification.success({
+          message: 'Delete Data Success!',
+          showProgress: true,
+        });
+      }
 
       // Check for specific error codes
       if (status === 401) {

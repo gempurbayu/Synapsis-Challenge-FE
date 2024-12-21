@@ -2,6 +2,7 @@ import { useSession } from '@/context/session-provider.context';
 import GridPost from './components/grid-post';
 import { useEffect, useState } from 'react';
 import AuthDialog from '../auth/component/auth-dialog';
+import { Breadcrumb } from 'antd';
 
 const BlogPost = () => {
   const session = useSession();
@@ -17,6 +18,13 @@ const BlogPost = () => {
 
   return (
     <>
+      <Breadcrumb
+        items={[
+          {
+            title: 'Home',
+          },
+        ]}
+      />
       <GridPost />
       <AuthDialog
         open={openDialog}

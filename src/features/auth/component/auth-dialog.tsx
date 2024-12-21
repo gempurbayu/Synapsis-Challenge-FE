@@ -1,5 +1,5 @@
 import CoreDialog from '@/components/core-dialog';
-import { Button, Form, FormProps, Input } from 'antd';
+import { Button, Form, FormProps, Input, notification } from 'antd';
 import React from 'react';
 import { FieldType } from '../types/auth.type';
 import { useSession } from '@/context/session-provider.context';
@@ -13,6 +13,10 @@ const AuthDialog = ({ open, setCloseDialog }: AuthDialogProps) => {
   const session = useSession();
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     session.setSession(values.name as string, values.accessToken as string);
+    notification.success({
+      message: 'Login Success',
+      showProgress: true,
+    });
     setCloseDialog();
   };
 
