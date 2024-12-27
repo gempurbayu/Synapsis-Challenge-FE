@@ -116,17 +116,19 @@ function DetailPost() {
           </div>
         </Col>
         <Col xs={24} lg={9}>
-          <div className="flex-row items-center justify-center w-full px-6 py-2 mt-3">
-            <Button
-              type="primary"
-              block
-              size="large"
-              style={{ backgroundColor: 'green' }}
-              onClick={() => router.push('/post/create')}
-            >
-              Create New Post
-            </Button>
-          </div>
+          {session.accessToken && (
+            <div className="flex-row items-center justify-center w-full px-6 py-2 mt-3">
+              <Button
+                type="primary"
+                block
+                size="large"
+                style={{ backgroundColor: 'green' }}
+                onClick={() => router.push('/post/create')}
+              >
+                Create New Post
+              </Button>
+            </div>
+          )}
           <div className="w-full px-6 py-2 mb-5">
             <Card title="Author Information" bordered={false}>
               <table className="text-sm w-full table-auto">
