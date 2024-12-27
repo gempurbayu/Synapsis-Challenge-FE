@@ -45,7 +45,11 @@ const CoreMainLayout = (props: MainLayoutProps) => {
             isDarkMode ? 'bg-white text-black' : 'bg-black text-white'
           }`}
         >
-          {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
+          {isDarkMode ? (
+            <SunOutlined style={{ color: 'black' }} />
+          ) : (
+            <MoonOutlined />
+          )}
         </button>
       </div>
       <Header className="flex items-center justify-between ">

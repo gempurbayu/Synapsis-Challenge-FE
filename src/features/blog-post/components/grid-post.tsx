@@ -18,6 +18,7 @@ import { useSession } from '@/context/session-provider.context';
 import { IPost } from '../types/post.type';
 import { useRouter } from 'next/navigation';
 import { SearchOutlined } from '@ant-design/icons';
+import AuthDialog from '@/features/auth/component/auth-dialog';
 
 const { Title } = Typography;
 
@@ -25,6 +26,7 @@ function GridPost() {
   const [postPerPage, setPostPerPage] = useState(20);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
+  const [openDialog, setOpenDialog] = useState(false);
   const router = useRouter();
 
   const session = useSession();
@@ -56,6 +58,14 @@ function GridPost() {
   const handleSearch = (value: string) => {
     setSearch(value);
     console.log(search);
+  };
+
+  const handleCreatePost = () => {
+    if (session.accessToken) {
+      router.push('/post/create');
+    } else {
+      setOpenDialog(true);
+    }
   };
 
   const onShowSizeChange: PaginationProps['onShowSizeChange'] = (
@@ -104,17 +114,17 @@ function GridPost() {
             level={3}
             style={{ margin: 'auto', padding: '2', textAlign: 'center' }}
           >
-            Welcome to Blog <b className="text-blue-400">Synapsis</b>,{' '}
-            <b>{session.name}!</b>
+            Welcome to Blog <b className="text-blue-400">Synapsis</b>
+            <b>{session?.name ? `, ${session?.name}!` : ''}</b>
           </Title>
         </Flex>
       </div>
-      <div className="w-[100vw] md:w-6/12 flex flex-col md:flex-row mb-2">
+      <div className="w-full md:w-6/12 flex flex-col md:flex-row mb-5 gap-4">
         <Input
           id="search"
           placeholder="Search Post"
           prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-          style={{ marginBottom: 15, width: 200 }}
+          style={{ marginBottom: 15, width: '100%' }}
           size="large"
           onChange={debounce((e: string) => {
             handleSearch(e);
@@ -124,8 +134,11 @@ function GridPost() {
           type="primary"
           block
           size="large"
-          style={{ backgroundColor: 'green', width: 150 }}
-          onClick={() => router.push('/post/create')}
+          style={{
+            backgroundColor: 'green',
+            width: 150,
+          }}
+          onClick={() => handleCreatePost()}
         >
           Create New Post
         </Button>
@@ -162,6 +175,10 @@ function GridPost() {
           />
         </div>
       )}
+      <AuthDialog
+        open={openDialog}
+        setCloseDialog={() => setOpenDialog(false)}
+      />
     </>
   );
 }

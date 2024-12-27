@@ -1,5 +1,6 @@
 'use client';
 
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface SessionContextType {
@@ -18,29 +19,35 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({
   const [accessToken, setAccessToken] = useState('');
 
   useEffect(() => {
-    // Load session data from localStorage on initial render
-    const savedName = localStorage.getItem('name') || '';
-    const savedAccessToken = localStorage.getItem('accessToken') || '';
+    // Load session data from cookie on initial render
+    const savedName = getCookie('name') || '';
+    const savedAccessToken = getCookie('accessToken') || '';
     setName(savedName);
     setAccessToken(savedAccessToken);
   }, []);
 
-  const setSession = (name: string, accessToken: string) => {
+  const setSession = async (name: string, accessToken: string) => {
     setName(name);
     setAccessToken(accessToken);
 
-    // Save session data to localStorage
-    localStorage.setItem('name', name);
-    localStorage.setItem('accessToken', accessToken);
+    // Save session data to cookie
+    // localStorage.setItem('name', name);
+    // localStorage.setItem('accessToken', accessToken);
+    setCookie('name', name, {
+      maxAge: 60 * 6 * 24,
+    });
+    setCookie('accessToken', accessToken, {
+      maxAge: 60 * 6 * 24,
+    });
   };
 
   const clearSession = () => {
     setName('');
     setAccessToken('');
 
-    // Remove session data from localStorage
-    localStorage.removeItem('name');
-    localStorage.removeItem('accessToken');
+    // Remove session data from cookie
+    deleteCookie('name');
+    deleteCookie('accessToken');
   };
 
   return (
