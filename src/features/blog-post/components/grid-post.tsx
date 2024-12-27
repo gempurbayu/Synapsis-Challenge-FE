@@ -119,7 +119,7 @@ function GridPost() {
           </Title>
         </Flex>
       </div>
-      <div className="w-full md:w-6/12 flex flex-col md:flex-row mb-5">
+      <div className="w-full md:w-6/12 flex flex-col md:flex-row mb-5 gap-4">
         <Input
           id="search"
           placeholder="Search Post"
@@ -134,7 +134,10 @@ function GridPost() {
           type="primary"
           block
           size="large"
-          style={{ backgroundColor: 'green', width: 150 }}
+          style={{
+            backgroundColor: 'green',
+            width: 150,
+          }}
           onClick={() => handleCreatePost()}
         >
           Create New Post
